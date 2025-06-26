@@ -1,0 +1,730 @@
+* {
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
+    box-sizing: border-box;
+    font-family: 'DIN Pro', Helvetica, sans-serif;
+}
+
+a {
+    transition: all 0.3s ease;
+}
+
+
+body {
+    font-family: 'DIN Pro', Helvetica, sans-serif;
+    background-color: rgb(53, 53, 53);
+}
+
+.header {
+    background-color: rgb(41, 40, 40);
+    display: flex;
+    color: white;
+    height: 90px;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    box-shadow: 0px 2px 5px black;
+    z-index: 3;
+
+}
+
+.link-profile {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+}
+
+.logout-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    width: 100px;
+}
+
+.header img {
+    margin-left: 150px;
+    width: 95px;
+    height: 80px;
+}
+
+.nav-reg p{
+    text-decoration: none;
+    color:#ffffff;
+}
+
+.nav-login p{
+    text-decoration: none;
+    color:#ffffff;
+}
+
+.nav-admin {
+    text-decoration: none;
+    color:#ffffff;
+}
+
+.link-login, .link-reg, .link-admin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+
+
+/* nav a:after {
+    background-color: #ffffff;
+    display: block;
+    content: "";
+    height: 1.5px;
+    width: 0%;
+    -webkit-transition: width .3s ease-in-out;
+    -moz--transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+} */
+
+/* nav a:hover:after,
+nav a:focus:after {
+    width: 100%;
+} */
+
+.vk img{
+    margin-right: 50px; 
+    width: 40px;
+    height: 40px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around; /* Распределяем элементы по ширине */
+    align-items: center;
+    width: 100%;
+    text-align: center; /* Выравнивание по центру по вертикали */
+    width: 100%;
+    padding: 0 10px; /* Уменьшим отступы */
+    flex-wrap: wrap; /* Разрешаем перенос элементов, если не помещаются */
+}
+
+nav a:hover {
+    color: #c0c0c0;
+}
+
+.nav-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    width: auto;
+    height: auto; /* Удаляем фиксированную высоту */
+    border-radius: 10px;
+    margin-top: 0;  /* Уберем отступы сверху */
+    margin-bottom: 0; /* Уберем отступы снизу */
+    display: inline-block;
+    color: #ffffff;
+    line-height: 2;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px 0; /* Добавляем padding сверху и снизу для высоты */
+}
+
+
+main {
+    height: 310vh;
+    background-color: rgb(53, 53, 53);
+    align-items: center;
+}
+
+.bt1 {
+    margin-left: 60px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.bt2 {
+    background-color: rgb(255, 50, 204);
+    border: 0;
+    color: white;
+    border-radius: 18px;
+    height: 37px;
+    width: 230px;
+    margin-right: 3%;
+    text-decoration: none;
+    text-align: center;
+
+}
+
+.bt2 p {
+    margin-top: 9px;
+}
+
+.bt2:hover {
+    background-color: rgb(155, 29, 123);
+}
+
+.bt3 {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 25px;
+    border-color: pink;
+    background-color: rgba(240, 248, 255, 0.295);
+    color: white;
+    font-size: 20px;
+    width: 300px;
+    height: 50px;
+    text-decoration: none;
+}
+
+.bt3 p {
+    margin-top: 12px;
+}
+
+.bt3:hover {
+    transition: .2s;
+    background-color: rgba(134, 134, 134, 0.295);
+    border-color: rgb(187, 102, 116);
+}
+
+.one {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
+    height: 600px;
+    width: 100%;
+    color: white;
+    background-image: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG1.jpg');
+    background-size: cover;
+}
+
+
+#img1 {
+    width: 50vh;
+    height: 30vh;
+}
+
+#htext1 {
+    font-size: 40px;
+}
+
+#text_1 {
+    width: 70%;
+    font-size: 25px;
+    line-height: 40px;
+}
+
+.stat {
+    margin-top: 50px;
+
+}
+
+.stat div {
+    display: inline-block;
+    align-items: center;
+    margin-left: 12%;
+}
+
+.stat div .text1 {
+    color: white;
+    font-size: 60px;
+    text-align: center;
+}
+
+.stat div .text2 {
+    color: rgb(253, 120, 165);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.horizontal {
+    margin: 80px;
+}
+
+.htext2 {
+    color: white;
+    font-size: 27px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.train div {
+    color: white;
+    position: relative; 
+    z-index: 1; 
+}
+
+.train2 {
+    background: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG2.jpg');
+    background-size: cover;
+}
+
+
+.train div:hover {
+    opacity: .8;
+    z-index: 2;
+}
+
+.train3 {
+    background-image: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG3.jpeg');
+    background-size: cover;
+}
+
+
+
+.train4 {
+    background-image: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG4.jpg');
+    background-size: cover;
+}
+
+
+
+.train5 {
+    background-image: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG5.jpg');
+    background-size: cover;
+}
+
+
+
+.train div p {
+    margin-top: 10%;
+    margin-left: 30px;
+    font-size: 30px;
+    font-weight: 505;
+}
+
+
+.train {
+    display: grid;
+    margin-top: 100px;
+    grid-template-columns: repeat(2, 600px);
+    grid-gap: 70px;
+    justify-content: center;
+    height: 850px;
+}
+
+.train ul {
+    margin-top: 50px;
+    margin-left: 5vh;
+    opacity: 0;
+}
+
+.train li {
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.train div:hover ul {
+    opacity: 1;
+}
+
+.train div:hover p {
+    opacity: 0;
+}
+
+#list {
+    opacity: 0;
+}
+
+.send {
+    height: 400px;
+    margin-top: 100px;
+    background: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG10.jpg');
+    background-size: cover;
+    padding-top: 30px;
+}
+
+.send h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(3, 20%);
+    align-content: center;
+    justify-content: center;
+
+}
+
+#btn-logout {
+    height: 20px;
+    width: 60px;
+    border: none;
+    color: #ffffff;
+    background-color: rgb(41, 40, 40);
+    font-size: 20px;
+}
+
+.order {
+    margin-top: 100px;
+} 
+
+form div {
+    display: flex;
+    justify-content: center;
+
+}
+
+select {
+    border: none;
+    border-radius: 10px;
+    height: 60px;
+    width: 250px;
+}
+
+input {
+    border: none;
+    border-radius: 10px;
+    height: 60px;
+    width: 250px;
+}
+
+.btsend {
+    color: #ffffff;
+
+    font-size: 20px;
+    margin-top: 50px;
+    height: 50px;
+    width: 250px;
+    border-radius: 20px;
+    background-color: rgb(255, 50, 204);
+    border: none;
+
+}
+
+.btnsend {
+    display: flex;
+    justify-content: center;
+}
+
+.btsend:hover {
+    background-color: rgb(155, 30, 124);
+}
+
+
+.area {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 600px);
+    grid-gap: 70px;
+    justify-content: center;
+    height: 700px;
+    color: white
+}
+
+.area div {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.area1 {
+    background: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG6.jpg');
+    background-size: cover;
+}
+
+.area2 {
+    background: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG7.jpg');
+    background-size: cover;
+}
+
+.area3 {
+    background: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG8.jpg');
+    background-size: cover;
+
+}
+
+.area4 {
+    background: linear-gradient(180deg, rgba(48, 48, 48, 0.5), rgb(54, 54, 54, 0.5)), url('../images/IMG9.jpg');
+    background-size: cover;
+
+}
+
+.area .txt {
+    font-size: 18px;
+    margin-top: 120px;
+    line-height: 25px;
+    opacity: 0;
+}
+
+.area .h {
+    font-size: 25px;
+}
+
+.area div:hover {
+    opacity: .8;
+}
+
+.area div:hover .txt {
+    opacity: 1;
+}
+
+.area div:hover .h {
+    opacity: 0;
+}
+
+.out h1 {
+    margin-top: 100px;
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+.popup {
+    top: 0;
+    right: 0;
+    left: 0;
+    font-size: 14px;
+    z-index: 10;
+    display: block;
+    visibility: hidden;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    min-width: 320px;
+    max-width: 600px;
+    /* фиксированное позиционирование, окно стабильно при прокрутке */
+    position: fixed;
+    padding-bottom: 10px;
+    border: 1px solid #383838;
+    /* скругление углов */
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    /* внешняя тень блока */
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    -ms-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    /* полная прозрачность окна, появление при клике */
+    opacity: 0;
+    /* эффект перехода (появление) */
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    -ms-transition: all ease .5s;
+    -o-transition: all ease .5s;
+    transition: all ease .5s;
+}
+
+.popup::before {
+    filter: blur(2px);
+}
+
+.listc {
+    display: grid;
+
+    grid-template-columns: repeat(2, 300px);
+
+}
+
+.listc div {
+    border-width: 1px;
+    border-color: rgb(78, 78, 78);
+    height: 40px;
+}
+
+.listc div:hover {
+    background-color: #d3d3d3;
+}
+
+.listc div p {
+    margin-top: 4%;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* активируем появление окна и затемнение фона */
+.overlay:target+.popup {
+    top: 20%;
+    /* положение окна от верха страницы при появлении */
+    visibility: visible;
+    opacity: 1;
+    /* убираем прозрачность */
+}
+
+/* формируем кнопку закрытия */
+.close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+    background-color: rgba(61, 61, 61, 0.8);
+    -webkit-box-shadow: 0px 0px 10px #000;
+    -moz-box-shadow: 0px 0px 10px #000;
+    box-shadow: 0px 0px 10px #000;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 20px;
+    /* задаём значения и эффект перехода при наведении */
+    -webkit-transition: all ease .8s;
+    -moz-transition: all ease .8s;
+    -ms-transition: all ease .8s;
+    -o-transition: all ease .8s;
+    transition: all ease .8s;
+}
+
+.close:before {
+    color: rgba(255, 255, 255, 0.9);
+    content: "X";
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+    font-size: 12px;
+}
+
+.close:hover {
+    background-color: rgba(44, 44, 44, 0.911);
+    color: white;
+    border-color: white;
+}
+
+.head {
+    height: 40px;
+    background-color: #383838;
+    color: rgb(191, 191, 191);
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.textop{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 15px;
+
+}
+.line2{
+    background-color: rgb(53, 53, 53);
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.hor2{
+    width: 100%;
+}
+
+footer{
+    background-color: rgb(53, 53, 53);
+    height: 30vh;
+}
+
+.all{
+    display: grid;
+    grid-template-columns: repeat(2, 600px);
+    margin-top: 100px;
+    margin-left: 20%;
+}
+
+.all div{
+    align-items: center;
+    width: 100%;
+}
+
+.links{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    row-gap: 20px;
+    text-align: center;
+}
+
+.links a{
+    text-decoration: none;
+    color: white;
+}
+
+.links a:hover{
+    color: rgb(97, 97, 97);
+}
+
+.inf p{
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.bt5{
+    margin-top: 70px;
+    background-color: rgb(255, 50, 204);
+    border: none;
+    border-radius: 30px;
+    width: 170px;
+    height: 40px;
+    color: white;
+}
+
+.bt5:hover{
+    background-color: rgb(155, 29, 123);
+}
+
+.undertext{
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: rgb(190, 190, 190);
+    font-size: 12px;
+}
+
+
+
+@media (width<1200px) {
+    .stat {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        row-gap: 30px;
+    }
+
+    nav {
+        padding-left: 0;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: repeat(1, auto);
+        justify-content: center;
+        row-gap: 10px;
+    }
+
+    form div {
+        width: 300px;
+    }
+    
+
+
+    main{
+        height: 320vh;
+    }
+
+}
+
+/* @media (width<1500px){
+
+    .header img {
+        margin-left: 10px;
+    }
+
+
