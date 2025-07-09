@@ -464,15 +464,30 @@ border-right: 1px solid #747474;
 }
 
 footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(53, 53, 53);
     height: 30vh;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.description {
+    font-size: 12px;
+    color: #bbbbbb;
+}
+
+.foot {
+    width: 80%;
 }
 
 .all {
-    display: grid;
-    grid-template-columns: repeat(2, 600px);
-    margin-top: 50px;
-    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    /* grid-template-columns: repeat(2, 600px); */
 }
 
 .all div {

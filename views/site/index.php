@@ -67,7 +67,11 @@ $this->registerCssFile(
             ['class' => 'btn btn-primary']
         );
         ?>
-        <a id="link4" href="Index2.html">Фитнес-гид</a>
+        <?php if (Yii::$app->user->isGuest):?>
+            <a id="link-memberships" href="<?=Url::to(['site/registration'])?>">Абонементы</a>
+            <?php else: ?>
+                <a id="link-memberships" href="<?=Url::to(['site/memberships'])?>">Абонементы</a>
+            <?php endif; ?>
         <?php
         if (!Yii::$app->user->isGuest && Yii::$app->user->identity !== null && Yii::$app->user->identity->getRole() === 'admin'):
             Yii::info("Роль пользователя: " . Yii::$app->user->identity->getRole(), 'debug'); ?>

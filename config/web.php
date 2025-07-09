@@ -71,6 +71,7 @@ $config = [
                 'schedule' => 'site/schedule',
                 'login' => 'site/login',
                 'registration' => 'site/registration',
+                'memberships' => 'site/memberships',
             ],
         ],
 

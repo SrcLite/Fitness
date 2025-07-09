@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\MembershipType;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -15,7 +16,6 @@ use app\models\NotFoundHttpException;
 use app\models\Schedule;
 use app\models\UserSchedule;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
 
 
 
@@ -348,5 +348,12 @@ class SiteController extends Controller
         }
 
         return $this->redirect(['site/schedule']);
+    }
+
+    public function actionMemberships()
+    {
+        $membeshipTypes = MembershipType::find()->all();
+        
+        return $this->render('memberships', ['membershipTypes' => $membeshipTypes,]);
     }
 }
