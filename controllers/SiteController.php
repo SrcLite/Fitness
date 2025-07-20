@@ -356,4 +356,5 @@ class SiteController extends Controller
         
         return $this->render('memberships', ['membershipTypes' => $membeshipTypes,]);
     }
+
 }

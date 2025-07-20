@@ -1,4 +1,4 @@
-<?php 
+<?php
 /** @var yii\web\View $this */
 use yii\helpers\Url;
 use app\assets\AppAsset;
@@ -8,11 +8,11 @@ $this->title = 'Расписание';
 AppAsset::register($this);
 
 $this->registerCssFile(
-    Url::to('@web/css/memberships_style.css')<
+    Url::to('@web/css/memberships_style.css'),
     [
         'appendTimestamp' => true,
     ]
-    );
+);
 
 ?>
 
@@ -98,22 +98,96 @@ $this->registerCssFile(
             <h1>Абонементы</h1>
             <hr>
         </div>
-        <div class="list-main">
-            <?php foreach ($membershipTypes as $membership): ?>
-            <div class="month">
-                <div class="month-name">
-                    <?= Html::encode($membership->name)?>
-                </div>
-                <div class="month-info">
-                    <div class="month-price">
-                       <?=number_format($membership->price, 2, ',', ' ')?> руб.
+        <div class="list-mems-main">
+            <div class="list-mems">
+                <?php foreach ($membershipTypes as $membership): ?>
+                    <div class="type-of-mem" data-membership-id="<?= $membership->id ?>">
+                        <div class="month-name">
+                            <?= Html::encode($membership->name) ?>
+                        </div>
+                        <div class="month-info">
+                            <div class="month-price">
+                                <?= number_format($membership->price, 2, ',', ' ') ?> руб.
+                            </div>
+                            <div class="month-buy-but">
+                                <button class="buy-but">Купить</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="month-buy-but">
-                        <button>Купить</button>
-                    </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </main>
+
+    <?php if (!empty($membershipTypes)): ?>
+        <?php foreach ($membershipTypes as $membership): ?>
+            <div class="membership-detail-overlay" data-membership-id="<?= $membership->id ?>">
+                <div class="membership-detail-content">
+                    <h2 class="name-overlay"><?= Html::encode($membership->name) ?></h2>
+                    <div class="main-info-overlay">
+                        <h3 class="info-name-overlay">Цена:</h3>
+                        <p class="info-overlay"><?= number_format($membership->price, 2, ',', ' ') ?> руб.</p>
+                        <h3 class="info-name-overlay">Описание:</h3>
+                        <p class="info-overlay"><?= Html::encode($membership->description) ?></p>
+                        <h3 class="info-name-overlay">Групповые тренировки</h3>
+                        <?php if ($membership->allowed_group_classes == 1): ?>
+                            <p>Да</p>
+                        <?php else: ?>
+                            <p>Нет</p>
+                        <?php endif; ?>
+                        <div class="close-overlay">
+                            <button class="close-detail-button">Закрыть</button>
+                        </div>
+                        <div class="buy-overlay">
+                            <button class="buy-but-overlay">Купить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <div class="line2">
+        <hr class="hor2" />
+    </div>
+    <footer>
+        <div class="all">
+            <div class="inf">
+                <p>ФЕДЕРАЛЬНАЯ СЕТЬ ФИТНЕС-КЛУБОВ БОМОНД</p>
+                <button class="bt5">Заказать звонок</button>
+            </div>
+            <div class="links">
+                <a href="#">Найти свой зал</a>
+                <a href="#">Начать тренировки</a>
+                <a href="#">Узнать о компании</a>
+                <a href="#">Фитнес для детей</a>
+                <a href="#">Фитнес-гид</a>
+                <a href="#">Фитнес-онлайн</a>
+            </div>
+        </div>
+        <div class="undertext">
+            <p>© БОМОНД 2011-2023 | Все права защищены.
+                ООО "БОМОНД" Адрес: 188689, Ленинrрадская область, Всеволожский район, город Кудрово, ул. Ленинградская
+                (Новый Оккервиль мкр) дом 1, помещение 2-Н
+                Копирование материалов данного сайта без разрешения правообладателя запрещено.</p>
+        </div>
+    </footer>
+
+    <?php
+    $this->registerJs(
+        "
+        $('.type-of-mem').click(function() {
+            var membershipId = $(this).data('membership-id');
+            $('.membership-detail-overlay[data-membership-id=\"' + membershipId + '\"]').fadeIn();
+        });
+
+        $('.close-detail-button').click(function() {
+            $('.membership-detail-overlay').fadeOut();
+        });
+
+        $('.membership-detail-overlay').hide(); // Initially hide all overlays
+
+        "
+    );
+    ?>
 </body>

@@ -1,0 +1,476 @@
+* {
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
+    box-sizing: border-box;
+    font-family: 'DIN Pro', Helvetica, sans-serif;
+}
+
+a {
+    transition: all 0.3s ease;
+}
+
+
+body {
+    font-family: 'DIN Pro', Helvetica, sans-serif;
+    background-color: rgb(53, 53, 53);
+}
+
+.header {
+    background-color: rgb(41, 40, 40);
+    display: flex;
+    color: white;
+    height: 90px;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    box-shadow: 0px 2px 5px black;
+    z-index: 3;
+
+}
+
+.link-profile {
+    display: flex;
+    justify-content: space-between;
+    justify-content: center;
+}
+
+.logout-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    width: 100px;
+}
+
+.header img {
+    margin-left: 150px;
+    width: 95px;
+    height: 80px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    /* Распределяем элементы по ширине */
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    /* Выравнивание по центру по вертикали */
+    width: 100%;
+    padding: 0 10px;
+    /* Уменьшим отступы */
+    flex-wrap: wrap;
+    /* Разрешаем перенос элементов, если не помещаются */
+}
+
+nav a:hover {
+    color: #c0c0c0;
+}
+
+.nav-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    width: auto;
+    height: auto;
+    /* Удаляем фиксированную высоту */
+    border-radius: 10px;
+    margin-top: 0;
+    /* Уберем отступы сверху */
+    margin-bottom: 0;
+    /* Уберем отступы снизу */
+    display: inline-block;
+    color: #ffffff;
+    line-height: 2;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px 0;
+    /* Добавляем padding сверху и снизу для высоты */
+}
+
+.bt1 {
+    margin-left: 60px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#btn-logout {
+    height: 20px;
+    width: 60px;
+    border: none;
+    color: #ffffff;
+    background-color: rgb(41, 40, 40);
+    font-size: 20px;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 40px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+main {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+hr {
+    margin-bottom: 50px;
+}
+
+.list-mems-main {
+    display: flex;
+    justify-content: center;
+}
+
+.list-mems {
+    display: grid;
+    grid-template-columns: repeat(2, 750px);
+    color: #ffffff;
+    margin-bottom: 50px;
+}
+
+.type-of-mem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #535353;
+    height: 220px;
+    margin: 30px;
+    padding-left: 20px;
+    border: 3px solid rgb(255, 50, 204);
+    border-radius: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.type-of-mem:hover {
+    background-color: #4d4d4d;
+}
+
+.type-of-mem div {
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.month-name {
+    margin-left: 30px;
+    font-size: 40px;
+}
+
+.month-info {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.month-price {
+    font-weight: 300;
+}
+
+.month-buy-but {
+    margin-left: 40px;
+}
+
+.buy-but {
+    border: none;
+    background-color: #434343;
+    border: 2px solid rgb(255, 50, 204);
+    border-radius: 20px;
+    outline: none;
+    box-shadow: none;
+    color: #ffffff;
+    font-size: 22px;
+    height: 70px;
+    width: 300px;
+}
+
+.buy-but:hover {
+    border-color: rgb(182, 41, 147);
+    color: #c5c5c5;
+}
+
+footer {
+    background-color: rgb(53, 53, 53);
+    height: 30vh;
+}
+
+.all {
+    display: grid;
+    grid-template-columns: repeat(2, 600px);
+    margin-top: 100px;
+    margin-left: 20%;
+}
+
+.all div {
+    align-items: center;
+    width: 100%;
+}
+
+.links {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    row-gap: 20px;
+    text-align: center;
+}
+
+.links a {
+    text-decoration: none;
+    color: white;
+}
+
+.links a:hover {
+    color: rgb(97, 97, 97);
+}
+
+.inf p {
+    color: white;
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.bt5 {
+    margin-top: 70px;
+    background-color: rgb(255, 50, 204);
+    border: none;
+    border-radius: 30px;
+    width: 170px;
+    height: 40px;
+    color: white;
+}
+
+.bt5:hover {
+    background-color: rgb(155, 29, 123);
+}
+
+.undertext {
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: rgb(190, 190, 190);
+    font-size: 12px;
+}
+
+.membership-detail-overlay {
+    transition: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.membership-detail-content {
+    display: block;
+    justify-self: center;
+    background-color: #434343;
+    border: 3px solid rgb(255, 50, 204);
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    width: 650px;
+    height: 300px;
+}
+
+.name-overlay {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.main-info-overlay {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+
+.info-overlay {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.info-name-overlay {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.membership-detail-content h2 {
+    font-size: 28px;
+}
+
+.close-overlay,
+.buy-overlay {
+    display: flex;
+    justify-content: center;
+}
+
+.close-detail-button {
+    border: none;
+    background-color: #434343;
+    color: #ffffff;
+    border: 2px, solid, rgb(255, 50, 204);
+    border-radius: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    height: 30px;
+    width: 80%;
+}
+
+.close-detail-button:hover {
+    background-color: #5e5e5e;
+}
+
+.buy-but-overlay {
+    border: none;
+    background-color: #5e5e5e;
+    color: #ffffff;
+    border: 2px, solid, rgb(255, 50, 204);
+    border-radius: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    height: 30px;
+    width: 80%;
+}
+
+.buy-but-overlay:hover {
+    background-color: #434343;
+}
+
+.popup {
+    top: 0;
+    right: 0;
+    left: 0;
+    font-size: 14px;
+    z-index: 10;
+    display: block;
+    visibility: hidden;
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    min-width: 320px;
+    max-width: 600px;
+    /* фиксированное позиционирование, окно стабильно при прокрутке */
+    position: fixed;
+    padding-bottom: 10px;
+    border: 1px solid #383838;
+    /* скругление углов */
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    /* внешняя тень блока */
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    -ms-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    /* полная прозрачность окна, появление при клике */
+    opacity: 0;
+    /* эффект перехода (появление) */
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    -ms-transition: all ease .5s;
+    -o-transition: all ease .5s;
+    transition: all ease .5s;
+}
+
+.popup::before {
+    filter: blur(2px);
+}
+
+.listc {
+    display: grid;
+
+    grid-template-columns: repeat(2, 300px);
+
+}
+
+.listc div {
+    border-width: 1px;
+    border-color: rgb(78, 78, 78);
+    height: 40px;
+}
+
+.listc div:hover {
+    background-color: #d3d3d3;
+}
+
+.listc div p {
+    margin-top: 4%;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* активируем появление окна и затемнение фона */
+.overlay:target+.popup {
+    top: 20%;
+    /* положение окна от верха страницы при появлении */
+    visibility: visible;
+    opacity: 1;
+    /* убираем прозрачность */
+}
+
+/* формируем кнопку закрытия */
+.close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+    background-color: rgba(61, 61, 61, 0.8);
+    -webkit-box-shadow: 0px 0px 10px #000;
+    -moz-box-shadow: 0px 0px 10px #000;
+    box-shadow: 0px 0px 10px #000;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 20px;
+    /* задаём значения и эффект перехода при наведении */
+    -webkit-transition: all ease .8s;
+    -moz-transition: all ease .8s;
+    -ms-transition: all ease .8s;
+    -o-transition: all ease .8s;
+    transition: all ease .8s;
+}
+
+.close:before {
+    color: rgba(255, 255, 255, 0.9);
+    content: "X";
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.9);
+    font-size: 12px;
+}
+
+.close:hover {
+    background-color: rgba(44, 44, 44, 0.911);
+    color: white;
+    border-color: white;
+}
