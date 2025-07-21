@@ -227,7 +227,9 @@ class SiteController extends Controller
             throw new NotFoundHttpException('User not found.');
         }
 
+        $weekStart = Yii::$app->request->get('weekStart');
         $schedules = [];
+        $registeredScheduleIds  = [];
 
         if ($user->role_id === 'trainer') {
             $schedules = Schedule::find()
@@ -247,7 +249,7 @@ class SiteController extends Controller
                 ->column();
         }
 
-        $scheduleData = $this->groupSchedulesByDayAndTime($schedules);
+        $data = $this->groupSchedulesByDayAndTime($schedules);
         $trainersList = [];
         $trainers = User::find()->where(['role_id' => 'trainer'])->all();
         $trainersList = ArrayHelper::map($trainers, 'id', function ($trainer) {
@@ -257,7 +259,8 @@ class SiteController extends Controller
 
         return $this->render('schedule', [
             'user' => $user,
-            'scheduleData' => $scheduleData,
+            'scheduleData' => $data['scheduleData'],
+            'days' => $data['days'],
             'trainersList' => $trainersList,
             'registeredSchedulesIds' => $registeredScheduleIds,
         ]);
@@ -267,6 +270,7 @@ class SiteController extends Controller
     {
 
         $userId = Yii::$app->user->id;
+        $weekStart = Yii::$app->request->get('weekStart');
         $schedules = Schedule::find()
             ->orderBy(['start_time' => SORT_ASC])
             ->all();
@@ -276,56 +280,77 @@ class SiteController extends Controller
             ->where(['user_id' => $userId])
             ->column();
 
-        $scheduleData = $this->groupSchedulesByDayAndTime($schedules);
+        $data = $this->groupSchedulesByDayAndTime($schedules, $weekStart);
         $trainersList = [];
 
 
         return $this->render('schedule', [
-            'scheduleData' => $scheduleData,
+            'scheduleData' => $data['scheduleData'],
+            'days' => $data['days'],
             'registeredSchedulesIds' => $registeredScheduleIds,
         ]);
 
     }
 
-    private function groupSchedulesByDayAndTime($schedules)
+    private function groupSchedulesByDayAndTime($schedules, $weekStart = null)
     {
         $scheduleData = [];
-        $days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+        $days = [];
         $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
 
-        foreach ($days as $dayIndex => $day) {
-            $scheduleData[$day] = [];
-            foreach ($times as $timeIndex => $time) {
-                $scheduleData[$day][$time] = null;
+        $currentDate = $weekStart ? new \DateTime($weekStart, new \DateTimeZone('Europe\Moscow')):  new \DateTime('now', new \DateTimeZone('Europe/Moscow'));
+        $currentWeekDay = (int)$currentDate->format('N');
+        $startOfWeek = clone $currentDate;
+        $startOfWeek->modify('-' . ($currentWeekDay -1) . 'days');
+
+        for ($i = 0; $i < 7; $i++) {
+            $day = clone $startOfWeek;
+            $day->modify("+$i days");
+            $days[] = [
+                'label' => ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'][$i],
+                'date' => $day->format('Y-m-d'),
+            ];
+        }
+
+        foreach ($days as $day) {
+            $scheduleData[$day['label']] = [];
+            foreach ($times as $time) {
+                $scheduleData[$day['label']][$time] = null;
             }
         }
 
         foreach ($schedules as $schedule) {
-
             $timeZone = new \DateTimeZone('Europe/Moscow');
-            $date = new \DateTime($schedule->start_time);
-            $date->setTimezone($timeZone);
+            $date = new \DateTime($schedule->start_time, $timeZone);
             $startTime = $date->format('H:i');
+            $scheduleDate = $date->format('Y-m-d');
             $dayOfWeek = date('D', $date->getTimestamp());
-            $dayOfWeek = strtoupper(substr($dayOfWeek, 0, 2));
-            if ($dayOfWeek == 'MO') {
-                $dayOfWeek = 'ПН';
-            } else if ($dayOfWeek == 'TU') {
-                $dayOfWeek = 'ВТ';
-            } else if ($dayOfWeek == 'WE') {
-                $dayOfWeek = 'СР';
-            } else if ($dayOfWeek == 'TH') {
-                $dayOfWeek = 'ЧТ';
-            } else if ($dayOfWeek == 'FR') {
-                $dayOfWeek = 'ПТ';
-            } else if ($dayOfWeek == 'SA') {
-                $dayOfWeek = 'СБ';
-            } else if ($dayOfWeek == 'SU') {
-                $dayOfWeek = 'ВС';
+            $dayOfWeek = strtoupper(substr($dayOfWeek, 0 ,2));
+
+            $dayMap = [
+                'MO' => 'ПН',
+                'TU' => 'ВТ',
+                'WE' => 'СР',
+                'TH' => 'ЧТ',
+                'FR' => 'ПТ',
+                'SA' => 'СБ',
+                'SU' => 'ВС',
+            ];
+            $dayOfWeek = isset($dayMap[$dayOfWeek]) ? $dayMap[$dayOfWeek] : null;
+
+            if ($dayOfWeek && in_array($startTime, $times)) {
+                foreach ($days as $day) {
+                    if ($day['label'] === $dayOfWeek && $day['date'] === $scheduleDate){
+                $scheduleData[$dayOfWeek][$startTime] = $schedule;
+                    }
+                }    
             }
-            $scheduleData[$dayOfWeek][$startTime] = $schedule;
         }
-        return $scheduleData;
+
+        return [
+            'scheduleData' => $scheduleData,
+            'days' => $days,
+        ];
     }
 
     public function actionRegisterForTraining()

@@ -21,7 +21,6 @@ $this->registerCssFile(
     ]
 );
 
-$days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
 $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
 
 ?>
@@ -158,20 +157,21 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
         <div class="schedule-outer-common">
             <div class="schedule-common">
                 <div class="schedule-header-days-common">
-                    <div class="schedule-header-but-prev"><button><img
+                    <div class="schedule-header-but-prev">
+                        <button onclick="changeWeek(-1)"><img
                                 src="<?= Yii::$app->request->baseUrl ?>/images/Arrow 2.svg"></button></div>
                     <div class="schedule-header-days">
                         <?php foreach ($days as $day): ?>
                             <div class="schedule-header-day">
-                                <?= Html::encode($day) ?>
+                                <?= Html::encode($day['label']) ?> (<?= (new \DateTime($day['date']))->format('d.m')?>)
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <div class="schedule-header-but-next"><button><img
+                    <div class="schedule-header-but-next">
+                        <button onclick="changeWeek(1)"><img
                                 src="<?= Yii::$app->request->baseUrl ?>/images/Arrow 1.svg"></button></div>
                 </div>
                 <div class="schedule-header-time-common">
-                    <?php // if (!empty($scheduleData)): ?>
                     <?php foreach ($times as $timeIndex => $time): ?>
                         <div class="schedule-header-time-<?= $timeIndex + 1 ?>-common">
                             <div class="schedule-header-time-<?= $timeIndex + 1 ?>">
@@ -180,7 +180,7 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
                             <div class="schedule-main-<?= $timeIndex + 1 ?>-common">
                                 <?php foreach ($days as $dayIndex => $day): ?>
                                     <?php
-                                    $schedule = isset($scheduleData[$day][$time]) ? $scheduleData[$day][$time] : null;
+                                    $schedule = isset($scheduleData[$day['label']][$time]) ? $scheduleData[$day['label']][$time] : null;
                                     $cellClass = "schedule-main-time-" . ($timeIndex + 1) . "-day-" . ($dayIndex + 1);
 
                                     ?>
@@ -270,4 +270,13 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
             </div>
         </div>
     </footer>
+
+    <script>
+        function changeWeek(offset) {
+            const currentDate = new Date('<?= (new \DateTime('now', new \DateTimeZone ('Europe/Moscow')))->format('Y-m-d') ?>');
+            currentDate.setDate(currentDate.getDate() + offset * 7);
+            window.location.href = '<?= Url::to(['site/schedule']) ?>?weekStart=' + currentDate.toISOString().split('T')[0];
+        }
+    </script>
+
 </body>
