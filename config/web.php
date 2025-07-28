@@ -72,6 +72,7 @@ $config = [
                 'login' => 'site/login',
                 'registration' => 'site/registration',
                 'memberships' => 'site/memberships',
+                'partial_schedule' => 'site/partial_schedule',
             ],
         ],
 

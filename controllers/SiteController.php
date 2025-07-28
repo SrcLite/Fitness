@@ -229,7 +229,6 @@ class SiteController extends Controller
 
         $weekStart = Yii::$app->request->get('weekStart');
         $schedules = [];
-        $registeredScheduleIds  = [];
 
         if ($user->role_id === 'trainer') {
             $schedules = Schedule::find()
@@ -249,13 +248,12 @@ class SiteController extends Controller
                 ->column();
         }
 
-        $data = $this->groupSchedulesByDayAndTime($schedules);
+        $data = $this->groupSchedulesByDayAndTime($schedules, $weekStart);
         $trainersList = [];
         $trainers = User::find()->where(['role_id' => 'trainer'])->all();
         $trainersList = ArrayHelper::map($trainers, 'id', function ($trainer) {
             return $trainer->first_name . ' ' . $trainer->last_name;
         });
-
 
         return $this->render('schedule', [
             'user' => $user,
@@ -268,7 +266,6 @@ class SiteController extends Controller
 
     public function actionAllSchedules()
     {
-
         $userId = Yii::$app->user->id;
         $weekStart = Yii::$app->request->get('weekStart');
         $schedules = Schedule::find()
@@ -281,15 +278,51 @@ class SiteController extends Controller
             ->column();
 
         $data = $this->groupSchedulesByDayAndTime($schedules, $weekStart);
-        $trainersList = [];
-
 
         return $this->render('schedule', [
             'scheduleData' => $data['scheduleData'],
             'days' => $data['days'],
             'registeredSchedulesIds' => $registeredScheduleIds,
         ]);
+    }
 
+    public function actionPartialSchedule()
+    {
+        $userId = Yii::$app->user->id;
+        $weekStart = Yii::$app->request->get('weekStart');
+        $schedules = [];
+
+        $user = User::findOne($userId);
+        if (!$user) {
+            throw new NotFoundHttpException('User not found.');
+        }
+
+        if ($user->role_id === 'trainer') {
+            $schedules = Schedule::find()
+                ->where(['trainer_id' => $userId])
+                ->orderBy(['start_time' => SORT_ASC])
+                ->all();
+        } else {
+            $schedules = Schedule::find()
+                ->innerJoin('user_schedule', 'schedule.id = user_schedule.schedule_id')
+                ->where(['user_schedule.user_id' => $userId])
+                ->orderBy(['start_time' => SORT_ASC])
+                ->all();
+
+            $registeredScheduleIds = UserSchedule::find()
+                ->select(['schedule_id'])
+                ->where(['user_id' => $userId])
+                ->column();
+        }
+
+        $data = $this->groupSchedulesByDayAndTime($schedules, $weekStart);
+
+        return $this->renderPartial('partial_schedule', [
+            'scheduleData' => $data['scheduleData'],
+            'days' => $data['days'],
+            'registeredSchedulesIds' => isset($registeredScheduleIds) ? $registeredScheduleIds : [],
+            'weekStart' => $weekStart,
+        ]);
     }
 
     private function groupSchedulesByDayAndTime($schedules, $weekStart = null)
@@ -298,10 +331,10 @@ class SiteController extends Controller
         $days = [];
         $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
 
-        $currentDate = $weekStart ? new \DateTime($weekStart, new \DateTimeZone('Europe\Moscow')):  new \DateTime('now', new \DateTimeZone('Europe/Moscow'));
+        $currentDate = $weekStart ? new \DateTime($weekStart, new \DateTimeZone('Europe/Moscow')) : new \DateTime('now', new \DateTimeZone('Europe/Moscow'));
         $currentWeekDay = (int)$currentDate->format('N');
         $startOfWeek = clone $currentDate;
-        $startOfWeek->modify('-' . ($currentWeekDay -1) . 'days');
+        $startOfWeek->modify('-' . ($currentWeekDay - 1) . ' days');
 
         for ($i = 0; $i < 7; $i++) {
             $day = clone $startOfWeek;
@@ -325,7 +358,7 @@ class SiteController extends Controller
             $startTime = $date->format('H:i');
             $scheduleDate = $date->format('Y-m-d');
             $dayOfWeek = date('D', $date->getTimestamp());
-            $dayOfWeek = strtoupper(substr($dayOfWeek, 0 ,2));
+            $dayOfWeek = strtoupper(substr($dayOfWeek, 0, 2));
 
             $dayMap = [
                 'MO' => 'ПН',
@@ -340,10 +373,10 @@ class SiteController extends Controller
 
             if ($dayOfWeek && in_array($startTime, $times)) {
                 foreach ($days as $day) {
-                    if ($day['label'] === $dayOfWeek && $day['date'] === $scheduleDate){
-                $scheduleData[$dayOfWeek][$startTime] = $schedule;
+                    if ($day['label'] === $dayOfWeek && $day['date'] === $scheduleDate) {
+                        $scheduleData[$dayOfWeek][$startTime] = $schedule;
                     }
-                }    
+                }
             }
         }
 
@@ -378,8 +411,7 @@ class SiteController extends Controller
     public function actionMemberships()
     {
         $membeshipTypes = MembershipType::find()->all();
-        
+
         return $this->render('memberships', ['membershipTypes' => $membeshipTypes,]);
     }
-
 }

@@ -1,8 +1,11 @@
 <?php
+
 /** @var yii\web\View $this */
+
 use yii\helpers\Url;
 use app\assets\AppAsset;
 use yii\helpers\Html;
+
 $this->title = 'Расписание';
 
 AppAsset::register($this);
@@ -66,7 +69,7 @@ $this->registerCssFile(
                 ['class' => 'btn btn-primary']
             );
             ?>
-            <a id="link4" href="Index2.html">Фитнес-гид</a>
+            <a class="memberships" href="<?= Url::to(['site/memberships']) ?>">Абонементы </a>
             <?php
             if (!Yii::$app->user->isGuest && Yii::$app->user->identity !== null && Yii::$app->user->identity->getRole() === 'admin'):
                 Yii::info("Роль пользователя: " . Yii::$app->user->identity->getRole(), 'debug'); ?>

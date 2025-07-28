@@ -1,5 +1,7 @@
 <?php
+
 /** @var yii\web\View $this */
+
 use yii\helpers\Url;
 use app\assets\AppAsset;
 use yii\helpers\Html;
@@ -10,6 +12,7 @@ use yii\helpers\Json;
 /* @var $scheduleData array */
 /* @var $trainersList array */
 /* @var $registeredSchedulesIds array */
+
 $this->title = 'Расписание';
 
 AppAsset::register($this);
@@ -75,7 +78,7 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
                 ['class' => 'btn btn-primary']
             );
             ?>
-            <a id="link4" href="Index2.html">Фитнес-гид</a>
+            <a class="memberships" href="<?= Url::to(['site/memberships']) ?>">Абонементы </a>
             <?php
             if (!Yii::$app->user->isGuest && Yii::$app->user->identity !== null && Yii::$app->user->identity->getRole() === 'admin'):
                 Yii::info("Роль пользователя: " . Yii::$app->user->identity->getRole(), 'debug'); ?>
@@ -113,63 +116,23 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
                 </div>
             </div>
         </div>
-        <!-- <div class="sort-common">
-            <div class="sort-left">
-                <div class="sort-trainer">
-                    <select>
-                        <option value="" disabled="true" selected="true">Тренер</option>
-                        <?php if (is_array($trainersList)): ?>
-                            <?php foreach ($trainersList as $id => $name): ?>
-                                <option value="<?= $id ?>"><?= Html::encode($name) ?></option>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <option value=''>Нет тренеров</option>
-                        <?php endif; ?>
-                    </select>
-                </div>
-                <div class="sort-date">
-                    <select>
-                        <option value="" disabled="true" selected="true">Дата</option>
-                    </select>
-                </div>
-            </div>
-            <div class="sort-right">
-                <div class="sort-week">
-                    <button class="sort-week-but">
-                        <div class="sort-week-but-img">
-                            <img src="">
-                        </div>
-                        <div class="sort-week-but-text">Неделя</div>
-                    </button>
-                </div>
-                <div class="sort-day">
-                    <button class="sort-day-but">
-                        <div class="sort-day-but-img">
-                            <img src="">
-                        </div>
-                        <div class="sort-day-but-text">День</div>
-                    </button>
-                </div>
-            </div>
-        </div> -->
         <hr class="line-head">
-        </hr>
         <div class="schedule-outer-common">
             <div class="schedule-common">
                 <div class="schedule-header-days-common">
                     <div class="schedule-header-but-prev">
-                        <button onclick="changeWeek(-1)"><img
-                                src="<?= Yii::$app->request->baseUrl ?>/images/Arrow 2.svg"></button></div>
+                        <button onclick="changeWeek(-1)"><img src="<?= Yii::$app->request->baseUrl ?>/images/Arrow 2.svg"></button>
+                    </div>
                     <div class="schedule-header-days">
                         <?php foreach ($days as $day): ?>
                             <div class="schedule-header-day">
-                                <?= Html::encode($day['label']) ?> (<?= (new \DateTime($day['date']))->format('d.m')?>)
+                                <?= Html::encode($day['label']) ?> (<?= (new \DateTime($day['date']))->format('d.m') ?>)
                             </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="schedule-header-but-next">
-                        <button onclick="changeWeek(1)"><img
-                                src="<?= Yii::$app->request->baseUrl ?>/images/Arrow 1.svg"></button></div>
+                        <button onclick="changeWeek(1)"><img src="<?= Yii::$app->request->baseUrl ?>/images/Arrow 1.svg"></button>
+                    </div>
                 </div>
                 <div class="schedule-header-time-common">
                     <?php foreach ($times as $timeIndex => $time): ?>
@@ -182,43 +145,33 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
                                     <?php
                                     $schedule = isset($scheduleData[$day['label']][$time]) ? $scheduleData[$day['label']][$time] : null;
                                     $cellClass = "schedule-main-time-" . ($timeIndex + 1) . "-day-" . ($dayIndex + 1);
-
                                     ?>
                                     <div id="schedule-main-<?= $timeIndex + 1 ?>" class="<?= $cellClass ?>">
                                         <?php if ($schedule): ?>
                                             <?php
-                                            Yii::info("Before check Registered Schedule IDs in schedule.php", 'schedule');
-                                            Yii::info("Registered Schedule IDs in schedule.php: " . print_r($registeredSchedulesIds, true), 'schedule');
-                                            Yii::info("Schedule ID: " . $schedule->id, 'schedule');
                                             $isRegistered = isset($registeredSchedulesIds) && is_array($registeredSchedulesIds) && in_array($schedule->id, $registeredSchedulesIds) ? true : false;
-                                            Yii::info("Is Registered: " . $isRegistered, 'schedule');
                                             ?>
                                             <div class="event">
                                                 <div class="event-color"></div>
                                                 <div class="event-info">
                                                     <?php if ($schedule && $schedule->start_time && $schedule->end_time): ?>
                                                         <?php
-                                                        $timeZone = new \DateTimeZone('Europe/Moscow'); // Укажите вашу таймзону
+                                                        $timeZone = new \DateTimeZone('Europe/Moscow');
                                                         $startTime = new \DateTime($schedule->start_time);
                                                         $startTime->setTimezone($timeZone);
                                                         $endTime = new \DateTime($schedule->end_time);
                                                         $endTime->setTimezone($timeZone);
                                                         ?>
-                                                        <div class="time"><?= $startTime->format('H:i') ?> -
-                                                            <?= $endTime->format('H:i') ?>
-                                                        </div>
+                                                        <div class="time"><?= $startTime->format('H:i') ?> - <?= $endTime->format('H:i') ?></div>
                                                     <?php endif; ?>
                                                     <?php if ($schedule && $schedule->trainingProgram): ?>
-                                                        <div class="event-name"><?= Html::encode($schedule->trainingProgram->name) ?>
-                                                        </div>
+                                                        <div class="event-name"><?= Html::encode($schedule->trainingProgram->name) ?></div>
                                                     <?php endif; ?>
                                                     <?php if ($schedule && $schedule->trainer): ?>
                                                         <div class="trainer-name">
                                                             <?= Html::encode($schedule->trainer->first_name . ' ' . $schedule->trainer->last_name) ?>
                                                         </div>
                                                     <?php endif; ?>
-
-                                                    <!-- Добавляем форму для записи -->
                                                     <?php if (Yii::$app->user->identity->role_id === 'client' && !$isRegistered): ?>
                                                         <?= Html::beginForm(['site/register-for-training'], 'post') ?>
                                                         <?= Html::hiddenInput('schedule_id', $schedule->id) ?>
@@ -228,7 +181,6 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
                                                     <?php if ($isRegistered): ?>
                                                         <p class="already-registered">Вы уже записаны</p>
                                                     <?php endif; ?>
-
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -237,9 +189,6 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <?php //else: ?>
-                    <!-- <p>Нет данных для отображения.</p> -->
-                    <?php //endif; ?>
                 </div>
             </div>
         </div>
@@ -271,11 +220,38 @@ $times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
         </div>
     </footer>
 
+    <div class="modal" id="scheduleModal">
+        <div class="modal-content">
+            <span class="modal-close">$time</span>
+            <h2>Информация о тренировке</h2>
+            <p><strong>Название:</strong> <span id="modal-trainnig-name"></span></p>
+            <p><strong>Время:</strong> <span id="modal-time"></span></p>
+            <p><strong>Тренер:</strong> <span id="modal-trainer-name"></span></p>
+            <p><strong>Место:</strong> <span id="modal-gym-location"></span></p>
+            <p><strong>Тип:</strong> <span id="modal-type"></span></p>
+            <p><strong>Вместимость:</strong> <span id="modal-capacity"></span></p>
+            <p><strong>Описание:</strong> <span id="modal-description"></span></p>
+        </div>
+    </div>
+
+
     <script>
+        let currentWeekStart = new Date('<?= (new \DateTime('now', new \DateTimeZone('Europe/Moscow')))->format('Y-m-d') ?>');
+
         function changeWeek(offset) {
-            const currentDate = new Date('<?= (new \DateTime('now', new \DateTimeZone ('Europe/Moscow')))->format('Y-m-d') ?>');
-            currentDate.setDate(currentDate.getDate() + offset * 7);
-            window.location.href = '<?= Url::to(['site/schedule']) ?>?weekStart=' + currentDate.toISOString().split('T')[0];
+            currentWeekStart.setDate(currentWeekStart.getDate() + offset * 7);
+            const url = '<?= Url::to(['site/partial-schedule']) ?>?weekStart=' + currentWeekStart.toISOString().split('T')[0];
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.querySelector('.schedule-common').innerHTML = html;
+                })
+                .catch(error => console.error('Ошибка при загрузке расписания:', error));
         }
     </script>
 
